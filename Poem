@@ -17,7 +17,7 @@ Randomly select the following number of elements from each list:
 You can do this with the choice() function in the random module.
 This function takes a list as input and returns a randomly selected element of the list.
 
-For example, here’s how you use random.choice() to get random element from the list ["a", "b", "c"]:
+For example, here’s how you use random.choice() to get random element from the list ["a", "b", "c"]: or any other method as per your choice. 
 
 import random
 random_element = random.choice(["a","b","c"])
@@ -53,19 +53,19 @@ adverbs = ["curiously", "extravagantly", "graciously", "reluctantly", "meticulou
 
 
 def noun_selection(list_of_nouns):
-    return random.choices(list_of_nouns, k=3)
+    return random.sample(list_of_nouns, k=3)
 
 
 def verb_selection(list_of_verbs):
-    return random.choices(list_of_verbs, k=3)
+    return random.sample(list_of_verbs, k=3)
 
 
 def adj_selection(list_of_adj):
-    return random.choices(list_of_adj, k=3)
+    return random.sample(list_of_adj, k=3)
 
 
 def prep_selection(list_of_prep):
-    return random.choices(list_of_prep, k=2)
+    return random.sample(list_of_prep, k=2)
 
 
 def adverb_selection(list_of_adv):
@@ -78,18 +78,26 @@ def article_selection(adj):
     return "A"
 
 
-noun1, noun2, noun3 = noun_selection(nouns)
-verb1, verb2, verb3 = verb_selection(verbs)
-adj1, adj2, adj3 = adj_selection(adjectives)
-prep1, prep2 = prep_selection(prepositions)
-adverb1 = adverb_selection(adverbs)
-article = article_selection(adj1)
+def poem():
+   poetry = f"""
+{article} {adj1} {noun1} {verb1} {prep1} the {adj2} {noun2} {adverb1},
+the {noun1} {verb2} the {noun2} {verb3} {prep2} the {adj3} {noun3}.
+"""
+   return poetry
+
 
 print(f"❤️ Your Poem ❤️")
-heading = f"{article} {adj1} {noun1}"
-print(heading)
-print()
-poem = f"{article} {adj1} {noun1} {verb1} {prep1} " \
-       f"the {adj2} {noun2} {adverb1}, "\
-       f"the {noun1} {verb2} the {noun2} {verb3} {prep2} the {adj3} {noun3}"
-print(poem)
+for _ in range(3):
+    noun1, noun2, noun3 = noun_selection(nouns)
+    verb1, verb2, verb3 = verb_selection(verbs)
+    adj1, adj2, adj3 = adj_selection(adjectives)
+    prep1, prep2 = prep_selection(prepositions)
+    adverb1 = adverb_selection(adverbs)
+    article = article_selection(adj1)
+    heading = f"{article} {adj1} {noun1}"
+    print(heading)
+    phrase = poem()
+    print(phrase)
+
+
+print("👌")
