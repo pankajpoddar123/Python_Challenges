@@ -1,0 +1,81 @@
+Challenge:
+Build a Text-Based RPG
+Write a text-based role-playing game (RPG) with the following characteristics:
+There’s one player and one monster
+The player starts with 100
+health, the monster with 150 health (it’s big!)
+The player can choose to attack, heal, or run away.
+If they attack, they deal between 10 - 15 damage to the monster.
+If they heal, they regain 30 health, up to a maximum of 100.
+If they run away, the game ends.
+Athe player’s turn, if the monster is still alive, it deals 15 - 20 damage to theplayer.
+The game continues until either the player or the monster’s health reaches 0 , or the player runs away.
+Prevent the player from exiting the game by pressing Ctrl + C .
+Introduce double-damage critical hits that happen when an attack value is afactor of 3.
+Use emojis or string formatting syntax to make the game output more fun.
+
+import random
+
+player_health_score = 100
+monster_health_score = 150
+
+
+def damage_value(attacker):
+    if attacker == "player":
+        attacker_value = random.randint(10, 15)
+        if attacker_value % 3 == 0:
+            attacker_value = attacker_value * 2
+            print("🫵 Scored a ⭐⭐ hit")
+        return attacker_value
+    elif attacker == "monster":
+        attacker_value = random.randint(15, 20)
+        return attacker_value
+
+
+print("Welcome to RBP Game 🥁")
+while True:
+    try:
+        choice = input(f"Type 'A' for (A)ttack OR 'H' for (H)eal OR 'R' for (R)unaway: ")
+    except KeyboardInterrupt:
+        print(" ❌ You cant quit the same with Ctrl + C")
+        print("Type 'R' to quit: ")
+        continue
+    #Player Turn
+    if choice.upper() == 'A':
+        print("You choose to attack the monster 👊")
+        damage_score = damage_value("player")
+        print(f"🫵 attacked 💀 by: {damage_score} points 🙌")
+        monster_health_score = monster_health_score - damage_score
+        print(f"💀 Score: {monster_health_score}")
+        print(f"🫵 Score: {player_health_score}")
+
+        if monster_health_score < 0:
+            print("🫵 Win 🏆")
+            break
+    elif choice.upper() == 'H':
+        print(f"🫵 Healing started")
+        player_health_score = player_health_score + 30
+        if player_health_score > 100:
+            player_health_score = 100
+
+        print(f"🫵 Score: {player_health_score}")
+        print(f"💀 Score: {monster_health_score}")
+        print(f"❤️‍🩹 Healing Completed ❤️❤️❤️")
+
+    elif choice.upper() == 'R':
+        print(f"🫵 choose to run away 😔")
+        break
+
+    else:
+        print("Enter correct option A/H/R: ")
+        continue
+
+    if monster_health_score > 0:
+        damage_score = damage_value("monster")
+        print(f"💀 👊 👊 you by {damage_score} ")
+        player_health_score = player_health_score - damage_score
+
+        if player_health_score <= 0:
+            print(f"💀 Wins 😆😆😆😆")
+            break
+
