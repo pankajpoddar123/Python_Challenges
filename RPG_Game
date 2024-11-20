@@ -13,7 +13,7 @@ The game continues until either the player or the monster’s health reaches 0 ,
 Prevent the player from exiting the game by pressing Ctrl + C .
 Introduce double-damage critical hits that happen when an attack value is afactor of 3.
 Use emojis or string formatting syntax to make the game output more fun.
-
+================================================================================
 import random
 
 player_health_score = 100
