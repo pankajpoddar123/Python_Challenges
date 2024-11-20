@@ -1,0 +1,95 @@
+Program that generates poetry
+------------------------------
+nouns = ["badger", "horse", "aardvark", "mouse", "gorilla", "elephant", "eagle", "sparrow"]
+verbs = ["hugs", "bounces", "meows", "hauls", "whispers", "flutters", "gallops", "shimmers"]
+adjectives = ["furry", "incredulous", "fragrant", "exuberant", "glistening", "melancholic", "serene"]
+prepositions = ["against", "after", "into", "beneath", "upon", "for", "in", "like", "over", "within"]
+adverbs = ["curiously", "extravagantly", "graciously", "reluctantly", "meticulously", "vigorously"]
+
+Rule
+----
+Randomly select the following number of elements from each list:
+--> Three nouns
+--> Three verbs
+--> Three adjectives
+--> Two prepositions
+--> One adverb
+You can do this with the choice() function in the random module.
+This function takes a list as input and returns a randomly selected element of the list.
+
+For example, here’s how you use random.choice() to get random element from the list ["a", "b", "c"]:
+
+import random
+random_element = random.choice(["a","b","c"])
+
+
+Using the randomly selected words, generate and display a poem with thefollowing structure inspired by Clifford Pickover
+
+=============================================
+Format
+
+{article} {adj1} {noun1}
+
+{article} {adj1} {noun1} {verb1} {prep1} the {adj2} {noun2} {adverb1}, the {noun1} {verb2} the {noun2} {verb3} {prep2} the {adj3} {noun3}
+
+Here, adj stands for adjective and prep for preposition. 
+Note that article will need to be either A or An depending on the first letter of the next word.
+Means if the adj1 is starting with vowel article will be An else A
+==========
+Example
+********
+A melancholic aardvark
+
+A melancholic aardvark shimmers like the furry horse extravagantly, the aardvark gallops the horse meows over the incredulous gorilla
+
+=========================================
+import random
+
+nouns = ["badger", "horse", "aardvark", "mouse", "gorilla", "elephant", "eagle", "sparrow"]
+verbs = ["hugs", "bounces", "meows", "hauls", "whispers", "flutters", "gallops", "shimmers"]
+adjectives = ["furry", "incredulous", "fragrant", "exuberant", "glistening", "melancholic", "serene"]
+prepositions = ["against", "after", "into", "beneath", "upon", "for", "in", "like", "over", "within"]
+adverbs = ["curiously", "extravagantly", "graciously", "reluctantly", "meticulously", "vigorously"]
+
+
+def noun_selection(list_of_nouns):
+    return random.choices(list_of_nouns, k=3)
+
+
+def verb_selection(list_of_verbs):
+    return random.choices(list_of_verbs, k=3)
+
+
+def adj_selection(list_of_adj):
+    return random.choices(list_of_adj, k=3)
+
+
+def prep_selection(list_of_prep):
+    return random.choices(list_of_prep, k=2)
+
+
+def adverb_selection(list_of_adv):
+    return random.choice(list_of_adv)
+
+
+def article_selection(adj):
+    if adj[0] in "aeiou":
+        return "An"
+    return "A"
+
+
+noun1, noun2, noun3 = noun_selection(nouns)
+verb1, verb2, verb3 = verb_selection(verbs)
+adj1, adj2, adj3 = adj_selection(adjectives)
+prep1, prep2 = prep_selection(prepositions)
+adverb1 = adverb_selection(adverbs)
+article = article_selection(adj1)
+
+print(f"❤️ Your Poem ❤️")
+heading = f"{article} {adj1} {noun1}"
+print(heading)
+print()
+poem = f"{article} {adj1} {noun1} {verb1} {prep1} " \
+       f"the {adj2} {noun2} {adverb1}, "\
+       f"the {noun1} {verb2} the {noun2} {verb3} {prep2} the {adj3} {noun3}"
+print(poem)
