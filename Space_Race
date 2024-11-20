@@ -1,0 +1,56 @@
+Create a dictionary named captains by using this list of tuples:
+
+[ 
+	("Enterprise", "Picard"), 
+	("Voyager", "Janeway"), 
+	("Defiant", "Sisko"),
+]
+
+Then, add another spaceship named "Old Bessie" with captain "Leela" to captains.
+Next, store a list of the spaceship names in a variable named spaceships.
+Randomly pick three spaceships from spaceships and store them in a list named positions.
+Create dictionary named "winners" with the keys 1, 2, 3. The default values should be "unknown" for each key. 
+Update the each winner key with the value from positions variable. 
+Example 1 for Picard 2 for Janeway etc
+Finally, loop over captains and congratulate the captain of the ship with the first ship and motivate the captain who didn’t make it to the top three.
+
+Example
+Better luck next time, Picard. 
+Congratulations, Sisko!
+
+=============================
+import random
+
+captains_list = [
+    ("Enterprise", "Picard"),
+    ("Voyager", "Janeway"),
+    ("Defiant", "Sisko"),
+]
+
+captains = dict(captains_list)
+
+#Another spaceship named "Old Bessie" with captain "Leela" to captains.
+captains["Old Bessie"] = "Leela"
+
+#Store a list of the spaceship names in a variable named spaceships.
+spaceships = list(captains.keys())
+
+#Randomly pick three spaceships from spaceships and store them in a list named positions.
+positions = random.sample(spaceships, 3)
+
+#Create dictionary named "winners" with the keys 1, 2, 3.
+#The default values should be "unknown" for each key
+winners = dict.fromkeys([1, 2, 3], "unknown")
+
+#Update the each winner key with the value from positions variable.
+for index, each_captain in enumerate(positions, start=1):
+    winners[index] = each_captain
+#print(winners)
+#print(captains)
+
+for each_spaceship, each_captain in captains.items():
+    if each_spaceship not in winners.values():
+        print(f"Better luck next time {each_captain}")
+
+    if each_spaceship == winners[1]:
+        print(f"Congratulations,{each_captain}")
